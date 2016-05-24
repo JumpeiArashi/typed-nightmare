@@ -1,9 +1,8 @@
 import {Promise} from 'es6-promise';
 
-// TODO: Nightmare constructor options
 // TODO: pdf options
 declare class Nightmare {
-  constructor (options?: Object);
+  constructor(options?: BrowserWindowOptions);
   goto (url: string, headers?: Object): Nightmare;
   back (): Nightmare;
   forward (): Nightmare;
@@ -31,5 +30,88 @@ declare class Nightmare {
   then <T> (fulfill?: (value: any) => T, reject?: (value: any) => T): Promise<T>;
   catch <T> (reject?: (error: any) => T): Promise<T>;
 }
+
+interface BrowserWindowOptions extends Rectangle {
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  useContentSize?: boolean;
+  center?: boolean;
+  minWidth?: number;
+  minHeight?: number;
+  maxWidth?: number;
+  maxHeight?: number;
+  resizable?: boolean;
+  movable?: boolean;
+  minimizable?: boolean;
+  maximizable?: boolean;
+  closable?: boolean;
+  alwaysOnTop?: boolean;
+  fullscreen?: boolean;
+  fullscreenable?: boolean;
+  skipTaskbar?: boolean;
+  kiosk?: boolean;
+  title?: string;
+  //TODO: NativeImage implementation
+  icon?: string;
+  show?: boolean;
+  frame?: boolean;
+  acceptFirstMouse?: boolean;
+  disableAutoHideCursor?: boolean;
+  autoHideMenuBar?: boolean;
+  enableLargerThanScreen?: boolean;
+  backgroundColor?: string;
+  hasShadow?: boolean;
+  darkTheme?: boolean;
+  transparent?: boolean;
+    type?: BrowserWindowType;
+  titleBarStyle?: 'default' | 'hidden' | 'hidden-inset';
+  webPreferences?: WebPreferences;
+}
+
+type BrowserWindowType = BrowserWindowTypeLinux | BrowserWindowTypeMac;
+type BrowserWindowTypeLinux = 'desktop' | 'dock' | 'toolbar' | 'splash' | 'notification';
+type BrowserWindowTypeMac = 'desktop' | 'textured';
+
+interface Rectangle {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
+
+interface WebPreferences {
+  nodeIntegration?: boolean;
+  preload?: string;
+  session?: string;
+  partition?: string;
+  zoomFactor?: number;
+  javascript?: boolean;
+  webSecurity?: boolean;
+  allowDisplayingInsecureContent?: boolean;
+  allowRunningInsecureContent?: boolean;
+  images?: boolean;
+  textAreasAreResizable?: boolean;
+  webgl?: boolean;
+  webaudio?: boolean;
+  plugins?: boolean;
+  experimentalFeatures?: boolean;
+  experimentalCanvasFeatures?: boolean;
+  directWrite?: boolean;
+  blinkFeatures?: string;
+  defaultFontFamily?: {
+    standard?: string;
+    serif?: string;
+    sansSerif?: string;
+    monospace?: string;
+  };
+  defaultFontSize?: number;
+  defaultMonospaceFontSize?: number;
+  minimumFontSize?: number;
+  defaultEncoding?: string;
+  backgroundThrottling?: boolean;
+}
+
 
 export = Nightmare;
