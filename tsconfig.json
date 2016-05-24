@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es5",
-    "noImplicitAny": false
+    "noImplicitAny": true,
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "out"
   },
-  "files": [
-    "nightmare.d.ts",
-    "typings/index.d.ts"
-  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "typings/browser",
+    "typings/browser.d.ts",
+    "out",
+    "source"
   ]
 }

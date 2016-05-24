@@ -2,7 +2,7 @@ import {Promise} from 'es6-promise';
 
 // TODO: Nightmare constructor options
 // TODO: pdf options
-export declare class Nightmare {
+declare class Nightmare {
   constructor (options?: Object);
   goto (url: string, headers?: Object): Nightmare;
   back (): Nightmare;
@@ -27,7 +27,9 @@ export declare class Nightmare {
   authentication (user: string, password: string): Nightmare;
   useragent (useragent: string): Nightmare;
   viewport (width: number, height: number): Nightmare;
-  then <T> (onFulfilled?: (value: any) => T, onRejected?: (value: any) => T): Promise<T>;
-  catch <T> (onRejected?: (error: any) => T): Promise<T>;
+  end (): Nightmare;
+  then <T> (fulfill?: (value: any) => T | Promise<T>, reject?: (value: any) => T | Promise<T>): Promise<T>;
+  catch <T> (reject?: (error: any) => T | Promise<T>): Promise<T>;
 }
 
+export = Nightmare;
