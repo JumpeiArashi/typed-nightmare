@@ -13,7 +13,7 @@ declare class Nightmare {
   upload (selector: string, path: string): Nightmare;
   scrollTo (top: number, left: number): Nightmare;
   inject (type: string, file: string): Nightmare;
-  wait <T> (fn: (...values: T[]) => boolean, ...values: T[]): Nightmare;
+  evaluate <T> (fn: (...values: T[]) => any, ...values: T[]): Nightmare;
   wait (ms: number): Nightmare;
   wait (selector: string): Nightmare;
   wait <T> (fn: (...values: T[]) => boolean, ...values: T[]): Nightmare;
@@ -28,8 +28,8 @@ declare class Nightmare {
   useragent (useragent: string): Nightmare;
   viewport (width: number, height: number): Nightmare;
   end (): Nightmare;
-  then <T> (fulfill?: (value: any) => T | Promise<T>, reject?: (value: any) => T | Promise<T>): Promise<T>;
-  catch <T> (reject?: (error: any) => T | Promise<T>): Promise<T>;
+  then <T> (fulfill?: (value: any) => T, reject?: (value: any) => T): Promise<T>;
+  catch <T> (reject?: (error: any) => T): Promise<T>;
 }
 
 export = Nightmare;
