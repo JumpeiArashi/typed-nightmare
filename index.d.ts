@@ -1,8 +1,7 @@
 import {Promise} from 'es6-promise';
 
-// TODO: pdf options
 declare class Nightmare {
-  constructor(options?: BrowserWindowOptions);
+  constructor(options?: electron.BrowserWindowOptions);
   goto (url: string, headers?: Object): Nightmare;
   back (): Nightmare;
   forward (): Nightmare;
@@ -31,86 +30,109 @@ declare class Nightmare {
   catch <T> (reject?: (error: any) => T): Promise<T>;
 }
 
-interface BrowserWindowOptions extends Rectangle {
-  width?: number;
-  height?: number;
-  x?: number;
-  y?: number;
-  useContentSize?: boolean;
-  center?: boolean;
-  minWidth?: number;
-  minHeight?: number;
-  maxWidth?: number;
-  maxHeight?: number;
-  resizable?: boolean;
-  movable?: boolean;
-  minimizable?: boolean;
-  maximizable?: boolean;
-  closable?: boolean;
-  alwaysOnTop?: boolean;
-  fullscreen?: boolean;
-  fullscreenable?: boolean;
-  skipTaskbar?: boolean;
-  kiosk?: boolean;
-  title?: string;
-  // TODO: NativeImage implementation
-  icon?: string;
-  show?: boolean;
-  frame?: boolean;
-  acceptFirstMouse?: boolean;
-  disableAutoHideCursor?: boolean;
-  autoHideMenuBar?: boolean;
-  enableLargerThanScreen?: boolean;
-  backgroundColor?: string;
-  hasShadow?: boolean;
-  darkTheme?: boolean;
-  transparent?: boolean;
+namespace electron {
+
+  interface BrowserWindowOptions extends Rectangle {
+    width?: number;
+    height?: number;
+    x?: number;
+    y?: number;
+    useContentSize?: boolean;
+    center?: boolean;
+    minWidth?: number;
+    minHeight?: number;
+    maxWidth?: number;
+    maxHeight?: number;
+    resizable?: boolean;
+    movable?: boolean;
+    minimizable?: boolean;
+    maximizable?: boolean;
+    closable?: boolean;
+    alwaysOnTop?: boolean;
+    fullscreen?: boolean;
+    fullscreenable?: boolean;
+    skipTaskbar?: boolean;
+    kiosk?: boolean;
+    title?: string;
+    // TODO: NativeImage implementation
+    icon?: NativeImage | string;
+    show?: boolean;
+    frame?: boolean;
+    acceptFirstMouse?: boolean;
+    disableAutoHideCursor?: boolean;
+    autoHideMenuBar?: boolean;
+    enableLargerThanScreen?: boolean;
+    backgroundColor?: string;
+    hasShadow?: boolean;
+    darkTheme?: boolean;
+    transparent?: boolean;
     type?: BrowserWindowType;
-  titleBarStyle?: 'default' | 'hidden' | 'hidden-inset';
-  webPreferences?: WebPreferences;
-}
+    titleBarStyle?: 'default' | 'hidden' | 'hidden-inset';
+    webPreferences?: WebPreferences;
+  }
 
-type BrowserWindowType = BrowserWindowTypeLinux | BrowserWindowTypeMac;
-type BrowserWindowTypeLinux = 'desktop' | 'dock' | 'toolbar' | 'splash' | 'notification';
-type BrowserWindowTypeMac = 'desktop' | 'textured';
+  type BrowserWindowType = BrowserWindowTypeLinux | BrowserWindowTypeMac;
+  type BrowserWindowTypeLinux = 'desktop' | 'dock' | 'toolbar' | 'splash' | 'notification';
+  type BrowserWindowTypeMac = 'desktop' | 'textured';
 
-interface Rectangle {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-}
+  interface Rectangle {
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+  }
 
-interface WebPreferences {
-  nodeIntegration?: boolean;
-  preload?: string;
-  session?: string;
-  partition?: string;
-  zoomFactor?: number;
-  javascript?: boolean;
-  webSecurity?: boolean;
-  allowDisplayingInsecureContent?: boolean;
-  allowRunningInsecureContent?: boolean;
-  images?: boolean;
-  textAreasAreResizable?: boolean;
-  webgl?: boolean;
-  webaudio?: boolean;
-  plugins?: boolean;
-  experimentalFeatures?: boolean;
-  experimentalCanvasFeatures?: boolean;
-  directWrite?: boolean;
-  blinkFeatures?: string;
-  defaultFontFamily?: {
-    standard?: string;
-    serif?: string;
-    sansSerif?: string;
-    monospace?: string;
-  };
-  defaultFontSize?: number;
-  defaultMonospaceFontSize?: number;
-  minimumFontSize?: number;
-  defaultEncoding?: string;
-  backgroundThrottling?: boolean;
+  interface WebPreferences {
+    nodeIntegration?: boolean;
+    preload?: string;
+    session?: string;
+    partition?: string;
+    zoomFactor?: number;
+    javascript?: boolean;
+    webSecurity?: boolean;
+    allowDisplayingInsecureContent?: boolean;
+    allowRunningInsecureContent?: boolean;
+    images?: boolean;
+    textAreasAreResizable?: boolean;
+    webgl?: boolean;
+    webaudio?: boolean;
+    plugins?: boolean;
+    experimentalFeatures?: boolean;
+    experimentalCanvasFeatures?: boolean;
+    directWrite?: boolean;
+    blinkFeatures?: string;
+    defaultFontFamily?: {
+      standard?: string;
+      serif?: string;
+      sansSerif?: string;
+      monospace?: string;
+    };
+    defaultFontSize?: number;
+    defaultMonospaceFontSize?: number;
+    minimumFontSize?: number;
+    defaultEncoding?: string;
+    backgroundThrottling?: boolean;
+  }
+
+  declare class NativeImage {
+    static createEmpty(): NativeImage;
+    static createFromPath(path: string): NativeImage;
+    static createFromBuffer(buffer: Buffer, scaleFactor?: number): NativeImage;
+    static createFromDataURL(dataURL: string): NativeImage;
+    toPng(): Buffer;
+    toJpeg(quality: number): Buffer;
+    toDataURL(): string;
+    getNativeHandle(): Buffer;
+    isEmpty(): boolean;
+    getSize(): Dimension;
+    setTemplateImage(option: boolean): void;
+    isTemplateImage(): boolean;
+  }
+
+  interface Dimension {
+    width: number;
+    height: number;
+  }
 }
 
 
