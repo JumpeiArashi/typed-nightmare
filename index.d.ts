@@ -53,7 +53,7 @@ interface BrowserWindowOptions extends Rectangle {
   skipTaskbar?: boolean;
   kiosk?: boolean;
   title?: string;
-  //TODO: NativeImage implementation
+  // TODO: NativeImage implementation
   icon?: string;
   show?: boolean;
   frame?: boolean;
