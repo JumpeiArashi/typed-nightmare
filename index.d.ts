@@ -1,0 +1,117 @@
+import {Promise} from 'es6-promise';
+
+// TODO: pdf options
+declare class Nightmare {
+  constructor(options?: BrowserWindowOptions);
+  goto (url: string, headers?: Object): Nightmare;
+  back (): Nightmare;
+  forward (): Nightmare;
+  refresh (): Nightmare;
+  click (selector: string): Nightmare;
+  type (selector: string, text: string): Nightmare;
+  upload (selector: string, path: string): Nightmare;
+  scrollTo (top: number, left: number): Nightmare;
+  inject (type: string, file: string): Nightmare;
+  evaluate <T> (fn: (...values: T[]) => any, ...values: T[]): Nightmare;
+  wait (ms: number): Nightmare;
+  wait (selector: string): Nightmare;
+  wait <T> (fn: (...values: T[]) => boolean, ...values: T[]): Nightmare;
+  use (plugin: (nightmare: Nightmare) => void): Nightmare;
+  exists (selector: string): Nightmare;
+  visible (selector: string): Nightmare;
+  screenshot (path: string): Nightmare;
+  pdf (path: string, options?: Object): Nightmare;
+  title (): Nightmare;
+  url (): Nightmare;
+  authentication (user: string, password: string): Nightmare;
+  useragent (useragent: string): Nightmare;
+  viewport (width: number, height: number): Nightmare;
+  end (): Nightmare;
+  then <T> (fulfill?: (value: any) => T, reject?: (value: any) => T): Promise<T>;
+  catch <T> (reject?: (error: any) => T): Promise<T>;
+}
+
+interface BrowserWindowOptions extends Rectangle {
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  useContentSize?: boolean;
+  center?: boolean;
+  minWidth?: number;
+  minHeight?: number;
+  maxWidth?: number;
+  maxHeight?: number;
+  resizable?: boolean;
+  movable?: boolean;
+  minimizable?: boolean;
+  maximizable?: boolean;
+  closable?: boolean;
+  alwaysOnTop?: boolean;
+  fullscreen?: boolean;
+  fullscreenable?: boolean;
+  skipTaskbar?: boolean;
+  kiosk?: boolean;
+  title?: string;
+  //TODO: NativeImage implementation
+  icon?: string;
+  show?: boolean;
+  frame?: boolean;
+  acceptFirstMouse?: boolean;
+  disableAutoHideCursor?: boolean;
+  autoHideMenuBar?: boolean;
+  enableLargerThanScreen?: boolean;
+  backgroundColor?: string;
+  hasShadow?: boolean;
+  darkTheme?: boolean;
+  transparent?: boolean;
+    type?: BrowserWindowType;
+  titleBarStyle?: 'default' | 'hidden' | 'hidden-inset';
+  webPreferences?: WebPreferences;
+}
+
+type BrowserWindowType = BrowserWindowTypeLinux | BrowserWindowTypeMac;
+type BrowserWindowTypeLinux = 'desktop' | 'dock' | 'toolbar' | 'splash' | 'notification';
+type BrowserWindowTypeMac = 'desktop' | 'textured';
+
+interface Rectangle {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+}
+
+interface WebPreferences {
+  nodeIntegration?: boolean;
+  preload?: string;
+  session?: string;
+  partition?: string;
+  zoomFactor?: number;
+  javascript?: boolean;
+  webSecurity?: boolean;
+  allowDisplayingInsecureContent?: boolean;
+  allowRunningInsecureContent?: boolean;
+  images?: boolean;
+  textAreasAreResizable?: boolean;
+  webgl?: boolean;
+  webaudio?: boolean;
+  plugins?: boolean;
+  experimentalFeatures?: boolean;
+  experimentalCanvasFeatures?: boolean;
+  directWrite?: boolean;
+  blinkFeatures?: string;
+  defaultFontFamily?: {
+    standard?: string;
+    serif?: string;
+    sansSerif?: string;
+    monospace?: string;
+  };
+  defaultFontSize?: number;
+  defaultMonospaceFontSize?: number;
+  minimumFontSize?: number;
+  defaultEncoding?: string;
+  backgroundThrottling?: boolean;
+}
+
+
+export = Nightmare;

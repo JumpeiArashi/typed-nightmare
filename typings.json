@@ -1,0 +1,15 @@
+{
+  "name": "nightmare",
+  "main": "index.d.ts",
+  "homepage": "https://github.com/segmentio/nightmare",
+  "version": "2.4.1",
+  "devDependencies": {
+    "blue-tape": "registry:npm/blue-tape#0.1.0+20160322235613"
+  },
+  "dependencies": {
+    "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958"
+  },
+  "globalDevDependencies": {
+    "node": "registry:dt/node#6.0.0+20160523035754"
+  }
+}
