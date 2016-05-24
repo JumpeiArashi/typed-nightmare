@@ -6,10 +6,10 @@
   "devDependencies": {
     "blue-tape": "registry:npm/blue-tape#0.1.0+20160322235613"
   },
-  "ambientDevDependencies": {
-    "node": "registry:dt/node#4.0.0+20160319033040"
-  },
   "dependencies": {
     "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958"
+  },
+  "globalDevDependencies": {
+    "node": "registry:dt/node#6.0.0+20160523035754"
   }
 }
