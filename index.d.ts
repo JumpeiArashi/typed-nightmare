@@ -1,33 +1,94 @@
 import {Promise} from 'es6-promise';
 
-declare class Nightmare {
-  constructor(options?: electron.BrowserWindowOptions);
-  goto (url: string, headers?: Object): Nightmare;
-  back (): Nightmare;
-  forward (): Nightmare;
-  refresh (): Nightmare;
-  click (selector: string): Nightmare;
-  type (selector: string, text: string): Nightmare;
-  upload (selector: string, path: string): Nightmare;
-  scrollTo (top: number, left: number): Nightmare;
-  inject (type: string, file: string): Nightmare;
-  evaluate <T> (fn: (...values: T[]) => any, ...values: T[]): Nightmare;
-  wait (ms: number): Nightmare;
-  wait (selector: string): Nightmare;
-  wait <T> (fn: (...values: T[]) => boolean, ...values: T[]): Nightmare;
-  use (plugin: (nightmare: Nightmare) => void): Nightmare;
-  exists (selector: string): Nightmare;
-  visible (selector: string): Nightmare;
-  screenshot (path: string): Nightmare;
-  pdf (path: string, options?: Object): Nightmare;
-  title (): Nightmare;
-  url (): Nightmare;
-  authentication (user: string, password: string): Nightmare;
-  useragent (useragent: string): Nightmare;
-  viewport (width: number, height: number): Nightmare;
-  end (): Nightmare;
-  then <T> (fulfill?: (value: any) => T, reject?: (value: any) => T): Promise<T>;
-  catch <T> (reject?: (error: any) => T): Promise<T>;
+namespace nightmare {
+  declare class Nightmare {
+    constructor(options?: electron.BrowserWindowOptions);
+    engineVersions(): Nightmare;
+    authentication(user: string, password: string): Nightmare;
+    useragent(useragent: string): Nightmare;
+    end(): Nightmare;
+    goto(url: string, headers?: Object): Nightmare;
+    back(): Nightmare;
+    forward(): Nightmare;
+    refresh(): Nightmare;
+    click(selector: string): Nightmare;
+    mousedown(selector: string): Nightmare;
+    type(selector: string, text: string): Nightmare;
+    insert(selector: string, text: string): Nightmare;
+    check(selector: string): Nightmare;
+    uncheck(selector: string): Nightmare;
+    select(selector: string): Nightmare;
+    scrollTo(top: number, left: number): Nightmare;
+    viewport(width: number, height: number): Nightmare;
+    inject(type: string, file: string): Nightmare;
+    evaluate<T>(fn: (...values: T[]) => any, ...values: T[]): Nightmare;
+    wait(ms: number): Nightmare;
+    wait(selector: string): Nightmare;
+    wait<T>(fn: (...values: T[]) => boolean, ...values: T[]): Nightmare;
+    header(header: string, value: string): Nightmare;
+    exists(selector: string): Nightmare;
+    visible(selector: string): Nightmare;
+    screenshot(path: string): Nightmare;
+    html(path: string, saveType: 'HTMLOnly' | 'HTMLComplete' | 'MHTML'): Nightmare;
+    pdf(path: string, options?: electron.PrintToPDFOptions): Nightmare;
+    title(): Nightmare;
+    url(): Nightmare;
+    use(plugin: (nightmare: Nightmare) => void): Nightmare;
+    then<T>(fulfill?: (value: any) => T, reject?: (value: any) => T): Promise<T>;
+    catch<T>(reject?: (error: any) => T): Promise<T>;
+  }
+
+  interface NightmareOptions extends electron.BrowserWindowOptions {
+    waitTimeout ?: number;
+    paths ?: Paths;
+    electronPath ?: string;
+    switches ?: Switches;
+    dock ?: boolean;
+    openDevTools ?: boolean;
+  }
+
+  // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
+  interface Paths {
+    home ?: string;
+    appData ?: string;
+    userData ?: string;
+    temp ?: string;
+    exe ?: string;
+    module ?: string;
+    desktop ?: string;
+    documents ?: string;
+    downloads ?: string;
+    music ?: string;
+    pictures ?: string;
+    videos ?: string;
+  }
+
+  // https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
+  interface Switches {
+    'ignore-connection-limit' ?: string;
+    'disable-http-cache' ?: boolean;
+    'disable-http2' ?: boolean;
+    'remote-debugging-port' ?: number;
+    'js-flags' ?: string;
+    'proxy-server' ?: string;
+    'proxy-bypass-list' ?: string;
+    'proxy-pac-url' ?: string;
+    'no-proxy-server' ?: boolean;
+    'host-rules' ?: string;
+    'host-resolve-rules' ?: string;
+    'auth-server-whitelist' ?: string;
+    'auth-negotiate-delegate-whitelist' ?: string;
+    'ignore-certificate-errors' ?: string;
+    'ppapi-flash-path' ?: string;
+    'ppapi-flash-version' ?: string;
+    'log-net-log' ?: string;
+    'ssl-version-fallback-min' ?: string;
+    'cipher-suite-blacklist' ?: string;
+    'disable-renderer-backgrounding' ?: string;
+    'enable-logging' ?: boolean;
+    'v' ?: string;
+    'vmodule' ?: string;
+  }
 }
 
 namespace electron {
@@ -54,7 +115,6 @@ namespace electron {
     skipTaskbar?: boolean;
     kiosk?: boolean;
     title?: string;
-    // TODO: NativeImage implementation
     icon?: NativeImage | string;
     show?: boolean;
     frame?: boolean;
@@ -133,7 +193,14 @@ namespace electron {
     width: number;
     height: number;
   }
+
+  interface PrintToPDFOptions {
+    marginsType?: number;
+    pageSize?: 'A3' | 'A4' | 'A5' | 'Legal' | 'Letter' | 'Tabloid';
+    printBackground?: boolean;
+    printSelectionOnly?: boolean;
+    landscape?: boolean;
+  }
 }
 
-
-export = Nightmare;
+export = nightmare.Nightmare;
