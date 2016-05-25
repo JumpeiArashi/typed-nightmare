@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JumpeiArashi/typed-nightmare.svg?branch=master)](https://travis-ci.org/JumpeiArashi/typed-nightmare)
+
 # Typed Nightmare
 
 The type definition for [`nightmare`](https://github.com/segmentio/nightmare)
