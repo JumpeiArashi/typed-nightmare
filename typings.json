@@ -1,6 +1,6 @@
 {
   "name": "nightmare",
-  "main": "nightmare/lib/nightmare.d.ts",
+  "main": "lib/nightmare.d.ts",
   "homepage": "https://github.com/segmentio/nightmare",
   "version": "2.4.1",
   "devDependencies": {
