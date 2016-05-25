@@ -17,7 +17,7 @@ test('#useragent', t => {
     .useragent('nightmare')
     .goto('https://example.com')
     .wait(50)
-    .evaluate(() => {return navigator.userAgent})
+    .evaluate(() => {return navigator.userAgent;})
     .end()
     .then(ua => {
       t.is(ua, 'nightmare');
@@ -49,5 +49,5 @@ test('penetration', t => {
     .back()
     .forward()
     .refresh()
-    .end()
+    .end();
 });
