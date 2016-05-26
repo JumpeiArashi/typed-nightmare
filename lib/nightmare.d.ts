@@ -1,7 +1,7 @@
 import {Promise} from 'es6-promise';
 
-class Nightmare {
-  constructor(options?: electron.BrowserWindowOptions);
+declare class Nightmare {
+  constructor(options?: Nightmare.NightmareOptions);
   engineVersions(): Nightmare;
   authentication(user: string, password: string): Nightmare;
   useragent(useragent: string): Nightmare;
@@ -29,7 +29,7 @@ class Nightmare {
   visible(selector: string): Nightmare;
   screenshot(path: string): Nightmare;
   html(path: string, saveType: 'HTMLOnly' | 'HTMLComplete' | 'MHTML'): Nightmare;
-  pdf(path: string, options?: electron.PrintToPDFOptions): Nightmare;
+  pdf(path: string, options?: Nightmare.PrintToPDFOptions): Nightmare;
   title(): Nightmare;
   url(): Nightmare;
   use(plugin: (nightmare: Nightmare) => void): Nightmare;
@@ -37,59 +37,59 @@ class Nightmare {
   catch<T>(reject?: (error: any) => T): Promise<T>;
 }
 
-interface NightmareOptions extends electron.BrowserWindowOptions {
-  waitTimeout ?: number;
-  paths ?: Paths;
-  electronPath ?: string;
-  switches ?: Switches;
-  dock ?: boolean;
-  openDevTools ?: boolean;
-}
 
-// https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
-interface Paths {
-  home ?: string;
-  appData ?: string;
-  userData ?: string;
-  temp ?: string;
-  exe ?: string;
-  module ?: string;
-  desktop ?: string;
-  documents ?: string;
-  downloads ?: string;
-  music ?: string;
-  pictures ?: string;
-  videos ?: string;
-}
+namespace Nightmare {
+  interface NightmareOptions extends BrowserWindowOptions {
+    waitTimeout ?: number;
+    paths ?: Paths;
+    electronPath ?: string;
+    switches ?: Switches;
+    dock ?: boolean;
+    openDevTools ?: boolean;
+  }
 
-// https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
-interface Switches {
-  'ignore-connection-limit' ?: string;
-  'disable-http-cache' ?: boolean;
-  'disable-http2' ?: boolean;
-  'remote-debugging-port' ?: number;
-  'js-flags' ?: string;
-  'proxy-server' ?: string;
-  'proxy-bypass-list' ?: string;
-  'proxy-pac-url' ?: string;
-  'no-proxy-server' ?: boolean;
-  'host-rules' ?: string;
-  'host-resolve-rules' ?: string;
-  'auth-server-whitelist' ?: string;
-  'auth-negotiate-delegate-whitelist' ?: string;
-  'ignore-certificate-errors' ?: string;
-  'ppapi-flash-path' ?: string;
-  'ppapi-flash-version' ?: string;
-  'log-net-log' ?: string;
-  'ssl-version-fallback-min' ?: string;
-  'cipher-suite-blacklist' ?: string;
-  'disable-renderer-backgrounding' ?: string;
-  'enable-logging' ?: boolean;
-  'v' ?: string;
-  'vmodule' ?: string;
-}
+  // https://github.com/electron/electron/blob/master/docs/api/app.md#appgetpathname
+  interface Paths {
+    home ?: string;
+    appData ?: string;
+    userData ?: string;
+    temp ?: string;
+    exe ?: string;
+    module ?: string;
+    desktop ?: string;
+    documents ?: string;
+    downloads ?: string;
+    music ?: string;
+    pictures ?: string;
+    videos ?: string;
+  }
 
-namespace electron {
+  // https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md
+  interface Switches {
+    'ignore-connection-limit' ?: string;
+    'disable-http-cache' ?: boolean;
+    'disable-http2' ?: boolean;
+    'remote-debugging-port' ?: number;
+    'js-flags' ?: string;
+    'proxy-server' ?: string;
+    'proxy-bypass-list' ?: string;
+    'proxy-pac-url' ?: string;
+    'no-proxy-server' ?: boolean;
+    'host-rules' ?: string;
+    'host-resolve-rules' ?: string;
+    'auth-server-whitelist' ?: string;
+    'auth-negotiate-delegate-whitelist' ?: string;
+    'ignore-certificate-errors' ?: string;
+    'ppapi-flash-path' ?: string;
+    'ppapi-flash-version' ?: string;
+    'log-net-log' ?: string;
+    'ssl-version-fallback-min' ?: string;
+    'cipher-suite-blacklist' ?: string;
+    'disable-renderer-backgrounding' ?: string;
+    'enable-logging' ?: boolean;
+    'v' ?: string;
+    'vmodule' ?: string;
+  }
 
   interface BrowserWindowOptions extends Rectangle {
     width?: number;
@@ -201,5 +201,4 @@ namespace electron {
   }
 }
 
-namespace Nightmare {}
 export = Nightmare;
