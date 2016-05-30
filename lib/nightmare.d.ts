@@ -40,6 +40,7 @@ declare class Nightmare {
 
 namespace Nightmare {
   interface NightmareOptions extends BrowserWindowOptions {
+    gotoTimeout ?: number;
     waitTimeout ?: number;
     paths ?: Paths;
     electronPath ?: string;
