@@ -16,7 +16,7 @@ declare class Nightmare {
   insert(selector: string, text: string): Nightmare;
   check(selector: string): Nightmare;
   uncheck(selector: string): Nightmare;
-  select(selector: string): Nightmare;
+  select(selector: string, option: string): Nightmare;
   scrollTo(top: number, left: number): Nightmare;
   viewport(width: number, height: number): Nightmare;
   inject(type: string, file: string): Nightmare;
