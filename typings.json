@@ -9,7 +9,7 @@
   "dependencies": {
     "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958"
   },
-  "globalDevDependencies": {
+  "globalDependencies": {
     "node": "registry:dt/node#6.0.0+20160523035754"
   }
 }
